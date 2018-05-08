@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.oa.dao.mapper.ScoreDao" >
+    <resultMap id="ScoreResultMap" type="com.school.oa.entity.Score" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="subject_id" property="subject_id" jdbcType="INTEGER" />
+        <result column="subject_name" property="subject_name" jdbcType="VARCHAR" />
+        <result column="score" property="score" jdbcType="DOUBLE" />
+        <result column="user_id" property="user_id" jdbcType="INTEGER" />
+        <result column="user_name" property="user_name" jdbcType="VARCHAR" />
+        <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+        <result column="is_active" property="is_active" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Score_Column_List" >
+        id,subject_id,subject_name,score,user_id,user_name,create_time,update_time,note,is_active
+    </sql>
+    
+    <!-- 获取图书单条记录 -->
+    <select id="selectById" resultMap="ScoreResultMap" parameterType="com.school.oa.entity.Score" >
+        select
+        <include refid="Score_Column_List" />
+        from score
+        where id = #{id}
+    </select>
+    
+    <select id="findAll" resultMap="ScoreResultMap">
+    	select * from score where is_active = '1'
+    </select>
+    
+ 	<!-- 变更图书记录 -->
+    <update id="update" parameterType="com.school.oa.entity.Score">
+    	update score 
+    	<set>
+    		<if test="subject_id != null">
+    			subject_id = #{subject_id},
+    		</if>
+    		<if test="subject_name != null">
+    			subject_name = #{subject_name},
+    		</if>
+    		<if test="score != null">
+    			score = #{score},
+    		</if>
+    		<if test="user_id != null">
+    			user_id = #{user_id},
+    		</if>
+    		<if test="user_name != null">
+    			user_name = #{user_name},
+    		</if>
+    		<if test="update_time != null">
+    			update_time = #{update_time},
+    		</if>
+    		<if test="note != null">
+    			note = #{note},
+    		</if>
+    		<if test="is_active != null">
+    			is_active = #{is_active}
+    		</if>
+    		<where>
+    			  id = #{id}
+    		</where>
+    	</set>
+    </update>
+    
+    <!-- 插入图书记录 -->
+    <insert id="insert" parameterType="com.school.oa.entity.Score" useGeneratedKeys="true" keyProperty="id">  
+        insert into score (subject_id,subject_name,score,user_id,user_name,create_time,update_time,
+        					note,is_active)  
+        			values (#{subject_id},#{subject_name},#{score},#{user_id},#{user_name},
+        					#{create_time},#{update_time},#{note},#{is_active})  
+	</insert> 
+	
+	<!-- 删除图书 -->
+	<delete id="delete" parameterType="com.school.oa.entity.Score">
+		delete from score where id = #{id} 
+	</delete>
+   
+</mapper>

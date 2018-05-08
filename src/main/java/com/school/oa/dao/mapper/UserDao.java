@@ -15,5 +15,5 @@ public interface UserDao {
 	
 	int delete(Integer id);
 	
-	List<User> findall();
+	List<User> findAll();
 }

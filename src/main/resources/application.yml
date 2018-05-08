@@ -9,16 +9,23 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
 
 
+
 ---
 
 #开发配置
 spring:
   profiles: dev
-
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  resources:
+    static-locations: classpath:/WEB-INF/resources/
   datasource:
     url: jdbc:mysql://localhost:3306/school_oa
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+    
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource

@@ -73,10 +73,10 @@
     			role_id = #{role_id},
     		</if>
     		<if test="role_name != null">
-    			role_name = #{role_name},
+    			role_name = #{role_name}
     		</if>
     		<where>
-    			 where id = #{id}
+    			  id = #{id}
     		</where>
     	</set>
     </update>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.oa.dao.mapper.TimeTableDao" >
+    <resultMap id="TimeTableResultMap" type="com.school.oa.entity.TimeTable" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="college_id" property="college_id" jdbcType="INTEGER" />
+        <result column="class_id" property="class_id" jdbcType="INTEGER" />
+        <result column="mon" property="mon" jdbcType="INTEGER" />
+        <result column="tues" property="tues" jdbcType="INTEGER" />
+        <result column="wed" property="wed" jdbcType="INTEGER" />
+        <result column="thurs" property="thurs" jdbcType="INTEGER" />
+        <result column="fir" property="fir" jdbcType="INTEGER" />
+        <result column="sat" property="sat" jdbcType="INTEGER" />
+        <result column="sun" property="sun" jdbcType="INTEGER" />
+        <result column="mon_class_name" property="mon_class_name" jdbcType="VARCHAR" />
+        <result column="tues_class_name" property="tues_class_name" jdbcType="VARCHAR" />
+        <result column="wed_class_name" property="wed_class_name" jdbcType="VARCHAR" />
+        <result column="thurs_class_name" property="thurs_class_name" jdbcType="VARCHAR" />
+        <result column="fir_class_name" property="fir_class_name" jdbcType="VARCHAR" />
+        <result column="sat_class_name" property="sat_class_name" jdbcType="VARCHAR" />
+        <result column="sun_class_name" property="sun_class_name" jdbcType="VARCHAR" />
+        <result column="part" property="part" jdbcType="INTEGER" />
+        <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+        <result column="is_active" property="is_active" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="TimeTable_Column_List" >
+        id,college_id,class_id,mon,tues,wed,thurs,fir,sat,sun,mon_class_name,tues_class_name,
+		wed_class_name,thurs_class_name,fir_class_name,sat_class_name,sun_class_name,
+		part,create_time,update_time,is_active
+    </sql>
+    
+    <!-- 获取图书单条记录 -->
+    <select id="selectById" resultMap="TimeTableResultMap" parameterType="com.school.oa.entity.TimeTable" >
+        select
+        <include refid="TimeTable_Column_List" />
+        from timetable
+        where id = #{id}
+    </select>
+    
+    <select id="findAll" resultMap="TimeTableResultMap">
+    	select * from timetable where is_active = '1'
+    </select>
+ 
+ 	<!-- 变更图书记录 -->
+    <update id="update" parameterType="com.school.oa.entity.TimeTable">
+    	update timetable 
+    	<set>
+    		<if test="college_id != null">
+    			college_id = #{college_id},
+    		</if>
+    		<if test="class_id != null">
+    			class_id = #{class_id},
+    		</if>
+    		<if test="mon != null">
+    			mon = #{mon},
+    		</if>
+    		<if test="tues != null">
+    			tues = #{tues},
+    		</if>
+    		<if test="wed != null">
+    			wed = #{wed},
+    		</if>
+    		<if test="thurs != null">
+    			thurs = #{thurs},
+    		</if>
+    		<if test="fir != null">
+    			fir = #{fir},
+    		</if>
+    		<if test="sat != null">
+    			sat = #{sat},
+    		</if>
+    		<if test="sun != null">
+    			sun = #{sun},
+    		</if>
+    		<if test="mon_class_name != null">
+    			mon_class_name = #{mon_class_name},
+    		</if>
+    		<if test="tues_class_name != null">
+    			tues_class_name = #{tues_class_name},
+    		</if>
+    		<if test="wed_class_name != null">
+    			wed_class_name = #{wed_class_name},
+    		</if>
+    		<if test="thurs_class_name != null">
+    			thurs_class_name = #{thurs_class_name},
+    		</if>
+    		<if test="fir_class_name != null">
+    			fir_class_name = #{fir_class_name},
+    		</if>
+    		<if test="sat_class_name != null">
+    			sat_class_name = #{sat_class_name},
+    		</if>
+    		<if test="sun_class_name != null">
+    			sun_class_name = #{sun_class_name},
+    		</if>
+    		<if test="part != null">
+    			part = #{part},
+    		</if>
+    		<if test="update_time != null">
+    			update_time = #{update_time},
+    		</if>
+    		<if test="is_active != null">
+    			is_active = #{is_active}
+    		</if>
+    		<where>
+    			  id = #{id}
+    		</where>
+    	</set>
+    </update>
+    
+    <!-- 插入图书记录 -->
+    <insert id="insert" parameterType="com.school.oa.entity.TimeTable" useGeneratedKeys="true" keyProperty="id">  
+        insert into timetable (college_id,class_id,mon,tues,wed,thurs,fir,sat,sun,mon_class_name,tues_class_name,
+        						wed_class_name,thurs_class_name,fir_class_name,sat_class_name,sun_class_name,part,
+        						create_time,update_time,is_active)  
+        			values (#{college_id},#{class_id},#{mon},#{tues},#{wed},#{thurs},#{fir},#{sat},#{sun},#{mon_class_name},
+        					#{tues_class_name},#{wed_class_name},#{thurs_class_name},#{fir_class_name},#{sat_class_name},
+        					#{sun_class_name},#{part},#{create_time},#{update_time},#{is_active})  
+	</insert> 
+	
+	<!-- 删除图书 -->
+	<delete id="delete" parameterType="com.school.oa.entity.TimeTable">
+		delete from timetable where id = #{id} 
+	</delete>
+   
+</mapper>

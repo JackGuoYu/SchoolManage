@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.oa.dao.mapper.BookDao" >
+    <resultMap id="BookResultMap" type="com.school.oa.entity.Book" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="book_name" property="book_name" jdbcType="VARCHAR" />
+        <result column="book_code" property="book_code" jdbcType="VARCHAR" />
+        <result column="borrow_id" property="borrow_id" jdbcType="INTEGER" />
+        <result column="borrow_name" property="borrow_name" jdbcType="VARCHAR" />
+        <result column="borrow_time" property="borrow_time" jdbcType="TIMESTAMP" />
+        <result column="borrow_num" property="borrow_num" jdbcType="INTEGER" />
+        <result column="give_id" property="give_id" jdbcType="INTEGER" />
+        <result column="give_name" property="give_name" jdbcType="VARCHAR" />
+        <result column="give_time" property="give_time" jdbcType="TIMESTAMP" />
+        <result column="state" property="state" jdbcType="VARCHAR" />
+        <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+        <result column="is_active" property="is_active" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Book_Column_List" >
+        id,book_name,book_code,borrow_id,borrow_name,borrow_time,borrow_num,
+        give_id,give_name,give_time,state,create_time,update_time,is_active
+    </sql>
+    
+    <!-- 获取图书单条记录 -->
+    <select id="selectById" resultMap="BookResultMap" parameterType="com.school.oa.entity.Book" >
+        select
+        <include refid="Book_Column_List" />
+        from book
+        where id = #{id}
+    </select>
+    
+    <select id="findAll" resultMap="BookResultMap">
+    	select * from book where is_active = '1'
+    </select>
+ 
+ 	<!-- 变更图书记录 -->
+    <update id="update" parameterType="com.school.oa.entity.Book">
+    	update book 
+    	<set>
+    		<if test="book_name != null">
+    			book_name = #{book_name},
+    		</if>
+    		<if test="book_code != null">
+    			book_code = #{book_code},
+    		</if>
+    		<if test="borrow_id != null">
+    			borrow_id = #{borrow_id},
+    		</if>
+    		<if test="borrow_name != null">
+    			borrow_name = #{borrow_name},
+    		</if>
+    		<if test="borrow_time != null">
+    			borrow_time = #{borrow_time},
+    		</if>
+    		<if test="borrow_num != null">
+    			borrow_num = #{borrow_num},
+    		</if>
+    		<if test="name != null">
+    			name = #{name},
+    		</if>
+    		<if test="give_id != null">
+    			give_id = #{give_id},
+    		</if>
+    		<if test="give_name != null">
+    			give_name = #{give_name},
+    		</if>
+    		<if test="give_time != null">
+    			give_time = #{give_time},
+    		</if>
+    		<if test="state != null">
+    			state = #{state},
+    		</if>
+    		<if test="update_time != null">
+    			update_time = #{update_time},
+    		</if>
+    		<if test="is_active != null">
+    			is_active = #{is_active}
+    		</if>
+    		<where>
+    			  id = #{id}
+    		</where>
+    	</set>
+    </update>
+    
+    <!-- 插入图书记录 -->
+    <insert id="insert" parameterType="com.school.oa.entity.Book" useGeneratedKeys="true" keyProperty="id">  
+        insert into book (book_name,book_code,borrow_id,borrow_name,borrow_time,borrow_num,
+       					  give_id,give_name,give_time,state,create_time,update_time,is_active)  
+        			values (#{book_name},#{book_code},#{borrow_id},#{borrow_name},#{borrow_time},
+        					#{borrow_num},#{give_id},#{give_name},#{give_time},#{state},#{create_time},
+        					#{update_time},#{is_active})  
+	</insert> 
+	
+	<!-- 删除图书 -->
+	<delete id="delete" parameterType="com.school.oa.entity.Book">
+		delete from book where id = #{id} 
+	</delete>
+   
+</mapper>

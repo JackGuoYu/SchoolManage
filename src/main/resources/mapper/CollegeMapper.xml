@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.oa.dao.mapper.CollegeDao" >
+    <resultMap id="CollegeResultMap" type="com.school.oa.entity.College" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="College_Column_List" >
+        id, name
+    </sql>
+    
+    <!-- 获取学院单条记录 -->
+    <select id="selectById" resultMap="CollegeResultMap" parameterType="com.school.oa.entity.College" >
+        select
+        <include refid="College_Column_List" />
+        from college
+        where id = #{id}
+    </select>
+    
+    <select id="findAll" resultMap="CollegeResultMap">
+    	select * from college 
+    </select>
+ 
+ 	<!-- 变更学院记录 -->
+    <update id="update" parameterType="com.school.oa.entity.College">
+    	update college 
+    	<set>
+    		<if test="name != null">
+    			name = #{name}
+    		</if>
+    		<where>
+    			  id = #{id}
+    		</where>
+    	</set>
+    </update>
+    
+    <!-- 插入学院记录 -->
+    <insert id="insert" parameterType="com.school.oa.entity.College" useGeneratedKeys="true" keyProperty="id">  
+        insert into college (name)  values   (#{name})  
+	</insert> 
+	
+	<!-- 删除学院 -->
+	<delete id="delete" parameterType="com.school.oa.entity.College">
+		delete from college where id = #{id} 
+	</delete>
+   
+</mapper>
