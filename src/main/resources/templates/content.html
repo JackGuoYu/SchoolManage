@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+>
+<head>
+	<meta charset="utf-8" />
+	<title>首页</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="css/public.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript" src="js/jump.js"></script>
+</head>
+<body>
+	
+	 <div th:replace="head" ></div>
+	 	<div id="mainFrame" style="margin-left:auto;margin-right:auto;">
+	 		<div th:insert="left" ></div>
+	 		<div  id="rightMainContent" style="margin-left:250px; margin-right:20px;">
+	 			<div id="mainContent" th:insert="main"></div>
+	 		</div>
+	 	</div>
+	 	<!-- <div style="float:left;width:10%;margin-left:auto;margin-right:auto;"></div> -->
+	 	<!-- <div id="rightFrame" style="float:left;margin-left:250px; margin-right:20px;"></div>  -->
+	
+</body>
+<!-- 1、通过th:fragment指定一个html段 -->
+<!-- 	<div rows="100,*" cols="*" scrolling="No" framespacing="0"
+		frameborder="no" border="0" >
+		<head th:replace="head"/>
+	</div>
+
+	<div rows="100*" cols="220,*" scrolling="No" framespacing="0" frameborder="no" border="0" >
+		<div th:replace="left" name="leftmenu" id="mainFrame" title="mainFrame"></div>
+	 	<div th:replace="main" name="main" scrolling="yes" noresize="noresize" id="rightFrame" title="rightFrame"></div>
+ 	</div> -->
+ <!-- 	<frameset rows="100*" cols="220,*" scrolling="No"
+		framespacing="0" frameborder="no" border="0"> 
+		<frame src="left.html" name="leftmenu" id="mainFrame" title="mainFrame" />
+		<frame src="main.html" name="main" scrolling="yes" noresize="noresize" id="rightFrame" title="rightFrame"/>
+	</frameset> -->
+
+</html>

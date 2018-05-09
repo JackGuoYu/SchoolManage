@@ -19,8 +19,6 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
-  resources:
-    static-locations: classpath:/WEB-INF/resources/
   datasource:
     url: jdbc:mysql://localhost:3306/school_oa
     username: root

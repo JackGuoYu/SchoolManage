@@ -1,165 +1,173 @@
 package com.school.oa.controller;
 
-
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.school.oa.entity.User;
 import com.school.oa.service.UserService;
 
 @Controller
-@RequestMapping("/user")
-public class UserController{
-
+public class UserController {
+	
 	@Resource
 	private UserService userService;
 	
 	/**
-	 * 判断用户登录
-	 * @param user
+	 * 跳转到登陆页
+	 * @param map
 	 * @return
 	 */
-	@RequestMapping("/showUser")
-    public String showUser(User user){
-		System.out.println(user);
+	@RequestMapping("/login")
+    public String login(ModelMap map){
+		return "login";
+	}
+	
+	/**
+	 * 跳转到错误页面
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/error_oa")
+    public String error_oa(ModelMap map){
+		return "error_oa";
+	}
+	
+	/**
+	 * 跳转到注册页
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/useradd")
+    public String useradd(ModelMap map){
+		return "useradd";
+	}
+	
+	@RequestMapping(value="/validate", method=RequestMethod.POST)
+	public String validate(@ModelAttribute User user,Model model) throws Exception{
 		User obj = userService.getUser(user);
 		if(obj!=null) {
 			System.out.println("登录成功");
-			return "redirect:list";
+			return "content";
 		}
 		else {
 			System.out.println("登录失败");
-			return "redirect:error";
+			return "error_oa";
 		}
 	}
 	
 	/**
 	 * 创建用户
+	 * @param user
+	 * @return
 	 */
 	@RequestMapping(value="/create",method=RequestMethod.POST)
-    public String createUser(User user){
+    public String createUser(@ModelAttribute User user){
 		System.out.println(user);
 		int result = userService.createUser(user);
 		if(result!=0) {
 			System.out.println("创建成功");
-			return "redirect:list";
+			return "redirect:content";
 		}
 		else {
 			System.out.println("创建失败");
-			return "redirect:error";
+			return "redirect:error_oa";
 		}
 	}
 	
 	/**
-	 * 编辑用户
-	 */
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-    public String updateUser(User user){
-		System.out.println(user);
-		int result = userService.updateUser(user);
-		if(result!=0) {
-			System.out.println("创建成功");
-			return "redirect:list";
-		}
-		else {
-			System.out.println("创建失败");
-			return "redirect:error";
-		}
-	}
-	
-	@RequestMapping(value="/delete",method=RequestMethod.GET)
-    public String deleteUser(@RequestParam Integer userId){
-		int result = userService.deleteUser(userId);
-		if(result!=0) {
-			System.out.println("删除成功");
-			return "redirect:list";
-		}
-		else {
-			System.out.println("删除失败");
-			return "redirect:error";
-		}
-	}
-	
-	/**
-	 * 用户列表
-	 * @param model
+	 * 跳转到用户列表
+	 * @param map
 	 * @return
 	 */
-	@RequestMapping("/list")
-    @ResponseBody
-    public ModelAndView userList(Model model){
+	/*@RequestMapping("/userlist")
+    public String userlist(Model model){
 		List<User> users = userService.getUsers();
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("users", users);
-		modelAndView.setViewName("user_list");
-//		model.addAttribute("users", users);
-		return modelAndView;
-	}
+		model.addAttribute("users",users);
+		return "userlist";
+	}*/
 	
 	/**
-	 * 安卓
-	 * 显示列表
-	 * @param model
+	 * 跳转到用户列表（有页面布局的）
+	 * @param map
 	 * @return
 	 */
-	@RequestMapping("/a/list")
-    @ResponseBody
-    public List<User> userListJson(Model model){
+	@RequestMapping("/content_user")
+    public String content_user(Model model){
 		List<User> users = userService.getUsers();
-		
-		return users;
+		model.addAttribute("users",users);
+		return "content_user";
 	}
 	
 	/**
-	 * 跳转登录页
+	 * 跳转到首页
+	 * @param map
 	 * @return
 	 */
-	@RequestMapping("/login")  
-    public String login(){
-		return "login";
+	@RequestMapping("/content")
+    public String content(ModelMap map){
+		return "content";
+	}
+	
+	@RequestMapping("/demo11")
+    public String helloIndex(ModelMap map){
+		return "index";
+	}
+	
+	@RequestMapping("/demo")
+    public String helloHtml(ModelMap map){
+		return "changepwd";
+	}
+	
+	@RequestMapping("/demo2")
+    public String helloHtml2(ModelMap map){
+		return "head2";
+	}
+	
+	@RequestMapping("/demo3")
+    public String helloHtml3(ModelMap map){
+		return "left";
+	}
+	
+	@RequestMapping("/demo4")
+    public String helloHtml4(ModelMap map){
+		return "main";
+	}
+	
+	
+	
+	@RequestMapping("/demo6")
+    public String helloHtml6(ModelMap map){
+		return "p1";
+	}
+	
+	@RequestMapping("/demo7")
+    public String helloHtml7(ModelMap map){
+		return "p2";
+	}
+	
+	@RequestMapping("/demo8")
+    public String helloHtml8(ModelMap map){
+		return "p3";
+	}
+	
+	@RequestMapping("/demo9")
+    public String helloHtml9(ModelMap map){
+		return "tab";
 	}
 	
 
 	
-	/**
-	 * 跳转编辑页
-	 * @return
-	 */
-	@RequestMapping(value = "/edit",method=RequestMethod.GET)  
-    public ModelAndView edit(@RequestParam Integer userId){
-		ModelAndView modelAndView = new ModelAndView();
-		User user = userService.enterUserForm(userId);
-		modelAndView.addObject("user", user);
-		modelAndView.setViewName("user_edit");
-		return modelAndView;
+	
+	@RequestMapping("/userupdate")
+    public String helloHtml12(ModelMap map){
+		return "userupdate";
 	}
-	
-	/**
-	 * 跳转注册页
-	 * @return
-	 */
-	@RequestMapping("/register")  
-    public String register(){
-		return "user_register";
-	}
-	
-	/**
-	 * 错误页面
-	 * @return
-	 */
-	@RequestMapping("/error")  
-    public String error(){
-		return "error_oa";
-	}
-	
-	
 }
