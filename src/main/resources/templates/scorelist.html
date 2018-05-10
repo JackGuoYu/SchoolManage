@@ -2,17 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>管理员管理</title>
+<title>成绩管理</title>
 <link rel="stylesheet" type="text/css" href="css/css.css" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/page.js" ></script>
+<script type="text/javascript">
+	function addScore(){
+		window.location.href="http://localhost:8080/scoreadd";
+	}
+
+</script>
 </head>
+
 
 <body>
 	<div id="pageAll">
 		<div class="pageTop">
 			<div class="page">
-				<img src="img/coin07.png" /><span><a href="#">用户</a>&nbsp;-&nbsp;-</span>&nbsp;用户管理列表
+				<img src="img/coin15.png" /><span><a href="#">成绩</a>&nbsp;-&nbsp;-</span>&nbsp;成绩管理列表
 			</div>
 		</div>
 
@@ -20,39 +27,31 @@
 			<!-- user页面样式 -->
 			<div class="connoisseur">
 				<div class="conform">
-					<!-- <form>
 						<div class="cfD">
-							<input class="userinput" type="text" placeholder="输入用户名" />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-							<input class="userinput vpr" type="text" placeholder="输入用户密码" />
-							<button class="userbtn">添加</button>
+							<!-- <input class="userinput" type="text" placeholder="输入用户名" />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+							<input class="userinput vpr" type="text" placeholder="输入用户密码" /> -->
+							<button class="userbtn" onclick="addScore()">添加</button>
 						</div>
-					</form> -->
 				</div>
 				<!-- user 表格 显示 -->
 				<div class="conShow">
 					<table border="1" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="66px" class="tdColor tdC">序号</td>
+							<td width="150px" class="tdColor">科目</td>
+							<td width="80px" class="tdColor">分数</td>
 							<td width="150px" class="tdColor">用户名</td>
-							<td width="80px" class="tdColor">年龄</td>
-							<td width="80px" class="tdColor">性别</td>
-							<td width="100px" class="tdColor">电话</td>
-							<td width="100px" class="tdColor">学院</td>
-							<td width="100px" class="tdColor">专业</td>
-							<td width="80px" class="tdColor">角色</td>
+							<td width="150px" class="tdColor">备注</td>
 							<td width="130px" class="tdColor">操作</td>
 						</tr>
-						<tr height="40px" th:each="user,userStat:${users}">
-							<td th:text="${userStat.count}">1</td>
-							<td th:text="${user.username}">运营专员</td>
-							<td th:text="${user.age}">18</td>
-							<td th:text="${user.sex}">男</td>
-							<td th:text="${user.phone}"></td>
-							<td th:text="${user.class_name}"></td>
-							<td th:text="${user.college_name}"></td>
-							<td th:text="${user.role_name}"></td>
-							<td><a th:href="@{/useredit(userId=${user.id})}"><img class="operation"
-									src="img/update.png" /></a> <a th:href="@{/userDelete(userId=${user.id})}" ><img class="operation"
+						<tr height="40px" th:each="score,scoreStat:${scores}">
+							<td th:text="${scoreStat.count}">1</td>
+							<td th:text="${score.subject_name}">语文</td>
+							<td th:text="${score.score}">80</td>
+							<td th:text="${score.user_name}">张强</td>
+							<td th:text="${score.note}">666</td>
+							<td><a th:href="@{/scoreedit(scoreId=${score.id})}"><img class="operation"
+									src="img/update.png" /></a> <a th:href="@{/scoreDelete(scoreId=${score.id})}" ><img class="operation"
 								src="img/delete.png" /></a></td>
 						</tr>
 					</table>

@@ -3,6 +3,7 @@ package com.school.oa.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.school.oa.entity.User;
 import com.school.oa.service.UserService;
@@ -40,20 +42,13 @@ public class UserController {
 		return "error_oa";
 	}
 	
-	/**
-	 * 跳转到注册页
-	 * @param map
-	 * @return
-	 */
-	@RequestMapping("/useradd")
-    public String useradd(ModelMap map){
-		return "useradd";
-	}
+
 	
 	@RequestMapping(value="/validate", method=RequestMethod.POST)
-	public String validate(@ModelAttribute User user,Model model) throws Exception{
+	public String validate(@ModelAttribute User user,Model model, HttpSession session) throws Exception{
 		User obj = userService.getUser(user);
 		if(obj!=null) {
+			session.setAttribute("user", obj);
 			System.out.println("登录成功");
 			return "content";
 		}
@@ -68,7 +63,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="/create",method=RequestMethod.POST)
+	@RequestMapping(value="/createUser",method=RequestMethod.POST)
     public String createUser(@ModelAttribute User user){
 		System.out.println(user);
 		int result = userService.createUser(user);
@@ -82,17 +77,46 @@ public class UserController {
 		}
 	}
 	
+	
 	/**
-	 * 跳转到用户列表
+	 * 更新用户
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="/updateUser",method=RequestMethod.POST)
+    public String updateUser(@ModelAttribute User user,Model model){
+		System.out.println(user);
+		int result = userService.updateUser(user);
+		if(result!=0) {
+			List<User> users = userService.getUsers();
+			model.addAttribute("users",users);
+			return "/user/content_user";
+		}
+		else {
+			System.out.println("创建失败");
+			return "error_oa";
+		}
+	}
+	
+	/**
+	 * 删除用户
 	 * @param map
 	 * @return
 	 */
-	/*@RequestMapping("/userlist")
-    public String userlist(Model model){
-		List<User> users = userService.getUsers();
-		model.addAttribute("users",users);
-		return "userlist";
-	}*/
+	@RequestMapping(value="/userDelete", method=RequestMethod.GET)
+    public String deleteUser(@RequestParam Integer userId,Model model){
+		Integer result = userService.deleteUser(userId);
+		if(result!=0) {
+			List<User> users = userService.getUsers();
+			model.addAttribute("users",users);
+			return "/user/content_user";
+		}
+		else {
+			return "error_oa";
+		}
+		
+	}
+
 	
 	/**
 	 * 跳转到用户列表（有页面布局的）
@@ -103,7 +127,29 @@ public class UserController {
     public String content_user(Model model){
 		List<User> users = userService.getUsers();
 		model.addAttribute("users",users);
-		return "content_user";
+		return "user/content_user";
+	}
+	
+	/**
+	 * 跳转到用户编辑页面
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value="/useredit", method=RequestMethod.GET)
+    public String content_user_edit(@RequestParam Integer userId,Model model){
+		User user = userService.enterUserForm(userId);
+		model.addAttribute("user",user);
+		return "/user/content_user_edit";
+	}
+	
+	/**
+	 * 跳转到注册页
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value="/userRegister", method=RequestMethod.GET)
+    public String userRegister(){
+		return "useradd";
 	}
 	
 	/**
@@ -116,58 +162,5 @@ public class UserController {
 		return "content";
 	}
 	
-	@RequestMapping("/demo11")
-    public String helloIndex(ModelMap map){
-		return "index";
-	}
 	
-	@RequestMapping("/demo")
-    public String helloHtml(ModelMap map){
-		return "changepwd";
-	}
-	
-	@RequestMapping("/demo2")
-    public String helloHtml2(ModelMap map){
-		return "head2";
-	}
-	
-	@RequestMapping("/demo3")
-    public String helloHtml3(ModelMap map){
-		return "left";
-	}
-	
-	@RequestMapping("/demo4")
-    public String helloHtml4(ModelMap map){
-		return "main";
-	}
-	
-	
-	
-	@RequestMapping("/demo6")
-    public String helloHtml6(ModelMap map){
-		return "p1";
-	}
-	
-	@RequestMapping("/demo7")
-    public String helloHtml7(ModelMap map){
-		return "p2";
-	}
-	
-	@RequestMapping("/demo8")
-    public String helloHtml8(ModelMap map){
-		return "p3";
-	}
-	
-	@RequestMapping("/demo9")
-    public String helloHtml9(ModelMap map){
-		return "tab";
-	}
-	
-
-	
-	
-	@RequestMapping("/userupdate")
-    public String helloHtml12(ModelMap map){
-		return "userupdate";
-	}
 }

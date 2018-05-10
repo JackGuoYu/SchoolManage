@@ -45,9 +45,6 @@
     		<if test="username != null">
     			username = #{username},
     		</if>
-    		<if test="password != null">
-    			password = #{password},
-    		</if>
     		<if test="age != null">
     			age = #{age},
     		</if>
@@ -73,7 +70,10 @@
     			role_id = #{role_id},
     		</if>
     		<if test="role_name != null">
-    			role_name = #{role_name}
+    			role_name = #{role_name},
+    		</if>
+    		<if test="password != null">
+    			password = #{password}
     		</if>
     		<where>
     			  id = #{id}

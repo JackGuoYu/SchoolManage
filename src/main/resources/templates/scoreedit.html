@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑用户</title>
+<link rel="stylesheet" type="text/css" th:href="@{css/css.css}" />
+<script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;意见管理
+			</div>
+		</div>
+		<div class="page ">
+
+			<form action="#" th:action="@{/updateScore}" th:object="${score}" method="post">
+			<div class="banneradd bor">
+				<input name="id" type="hidden"  th:value="${score.id}" />
+				<div class="baTopNo">
+					<span>成绩编辑</span>
+				</div>
+				<div class="baBody">
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科目：<input name="subject_name" type="text" class="input3" th:value="${score.subject_name}"/>
+					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数：<input name="score" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" th:value="${score.score}"
+							class="input3" />
+					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;用户名：<input name="user_name"  type="text" th:value="${score.user_name}" class="input3" />
+					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注：<input name="note"  type="text" class="input3" th:value="${score.note}"/>
+					</div>
+					<div class="bbD">
+						<p class="bbDP">
+							<input type="submit" class="btn_ok btn_yes" value="提交" >
+							<a class="btn_ok btn_no" href="content_score">取消</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			</form>
+			<!-- 会员注册页面样式end -->
+		</div>
+	</div>
+</body>
+</html>
