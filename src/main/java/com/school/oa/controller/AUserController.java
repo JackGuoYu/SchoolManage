@@ -63,7 +63,11 @@ public class AUserController {
 				fr.setData(user);
 				fr.setCode(FrontResponse.SUCCESS);
 				fr.setMsg("执行成功");
+			}else {
+				fr.setCode(FrontResponse.FAILURE);
+				fr.setMsg("执行失败");
 			}
+	
 		} catch (Exception e) {
 			fr.setCode(FrontResponse.FAILURE);
 			fr.setMsg("执行失败");
@@ -83,6 +87,9 @@ public class AUserController {
 				fr.setData(users);
 				fr.setCode(FrontResponse.SUCCESS);
 				fr.setMsg("执行成功");
+			}else {
+				fr.setCode(FrontResponse.FAILURE);
+				fr.setMsg("执行失败");
 			}
 		} catch (Exception e) {
 			fr.setCode(FrontResponse.FAILURE);
