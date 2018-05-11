@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑用户</title>
+<link rel="stylesheet" type="text/css" th:href="@{css/css.css}" />
+<script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+<script type="text/javascript">
+	function hideOption(){
+		$("#college").text("-请选择学院-");
+	}
+	function hideOption2(){
+		$("#class_name").text("-请选择专业-");
+	}
+	function hideOption3(){
+		$("#class_name").text("-请选择专业-");
+	}
+	
+</script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="img/coin17.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;意见管理
+			</div>
+		</div>
+		<div class="page ">
+
+			<form action="#" th:action="@{/updateTimeTable}" th:object="${timeTable}" method="post">
+			<div class="banneradd bor">
+			<input name="id" type="hidden"  th:value="${timetable.id}" />
+				<div class="baTopNo">
+					<span>课表编辑</span>
+				</div>
+				<div class="baBody">
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学院：
+						<select name="college_name" onclick="hideOption()">     
+						  <option th:text="${timetable.college_name}" id="college">-请选择学院-</option>     
+						  <option th:each="college:${colleges}" th:value="${college.name}" th:text="${college.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						所属专业：
+						<select name="class_name" onclick="hideOption2()">     
+						  <option th:text="${timetable.class_name}" id="class_name">-请选择专业-</option>     
+						  <option th:each="oaclass:${oaclasses}" th:value="${oaclass.name}" th:text="${oaclass.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周一科目：
+						<select name="mon_class_name">     
+						  <option th:text="${timetable.mon_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周二科目：
+						<select name="tues_class_name">     
+						  <option th:text="${timetable.tues_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周三科目：
+						<select name="wed_class_name">     
+						  <option th:text="${timetable.wed_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周四科目：
+						<select name="thurs_class_name">     
+						  <option th:text="${timetable.thurs_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周五科目：
+						<select name="fir_class_name">     
+						  <option th:text="${timetable.fir_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周六科目：
+						<select name="sat_class_name">     
+						  <option th:text="${timetable.sat_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						周日科目：
+						<select name="sun_class_name">     
+						  <option th:text="${timetable.sun_class_name}">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;节数：
+						<select name="part" th:value="${timetable.part}">     
+						  <option >-请选择节数-</option>     
+						  <option value="1" th:selected="${timetable.part==1}">第一节</option>     
+						  <option value="2" th:selected="${timetable.part==2}">第二节</option> 
+						  <option value="3" th:selected="${timetable.part==3}">第三节</option>
+						  <option value="4" th:selected="${timetable.part==4}">第四节</option>
+						  <option value="5" th:selected="${timetable.part==5}">第五节</option>
+						  <option value="6" th:selected="${timetable.part==6}">第六节</option>
+						  <option value="7" th:selected="${timetable.part==7}">第七节</option>
+						  <option value="8" th:selected="${timetable.part==8}">第八节</option>
+						 </select>  
+					</div>
+					<div class="bbD">
+						<p class="bbDP">
+							<input type="submit" class="btn_ok btn_yes" value="提交" >
+							<a class="btn_ok btn_no" href="content_timetable">取消</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			</form>
+			<!-- 会员注册页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

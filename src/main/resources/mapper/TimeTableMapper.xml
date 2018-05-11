@@ -4,7 +4,9 @@
     <resultMap id="TimeTableResultMap" type="com.school.oa.entity.TimeTable" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="college_id" property="college_id" jdbcType="INTEGER" />
+        <result column="college_name" property="college_name" jdbcType="VARCHAR" />
         <result column="class_id" property="class_id" jdbcType="INTEGER" />
+        <result column="class_name" property="class_name" jdbcType="VARCHAR" />
         <result column="mon" property="mon" jdbcType="INTEGER" />
         <result column="tues" property="tues" jdbcType="INTEGER" />
         <result column="wed" property="wed" jdbcType="INTEGER" />
@@ -25,7 +27,7 @@
         <result column="is_active" property="is_active" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="TimeTable_Column_List" >
-        id,college_id,class_id,mon,tues,wed,thurs,fir,sat,sun,mon_class_name,tues_class_name,
+        id,college_id,college_name,class_id,class_name,mon,tues,wed,thurs,fir,sat,sun,mon_class_name,tues_class_name,
 		wed_class_name,thurs_class_name,fir_class_name,sat_class_name,sun_class_name,
 		part,create_time,update_time,is_active
     </sql>
@@ -49,8 +51,14 @@
     		<if test="college_id != null">
     			college_id = #{college_id},
     		</if>
+    		<if test="college_name != null">
+    			college_name = #{college_name},
+    		</if>
     		<if test="class_id != null">
     			class_id = #{class_id},
+    		</if>
+    		<if test="class_name != null">
+    			class_name = #{class_name},
     		</if>
     		<if test="mon != null">
     			mon = #{mon},
@@ -97,11 +105,11 @@
     		<if test="part != null">
     			part = #{part},
     		</if>
-    		<if test="update_time != null">
-    			update_time = #{update_time},
-    		</if>
     		<if test="is_active != null">
-    			is_active = #{is_active}
+    			is_active = #{is_active},
+    		</if>
+    		<if test="update_time != null">
+    			update_time = #{update_time}
     		</if>
     		<where>
     			  id = #{id}
@@ -111,10 +119,10 @@
     
     <!-- 插入图书记录 -->
     <insert id="insert" parameterType="com.school.oa.entity.TimeTable" useGeneratedKeys="true" keyProperty="id">  
-        insert into timetable (college_id,class_id,mon,tues,wed,thurs,fir,sat,sun,mon_class_name,tues_class_name,
+        insert into timetable (college_id,college_name,class_id,class_name,mon,tues,wed,thurs,fir,sat,sun,mon_class_name,tues_class_name,
         						wed_class_name,thurs_class_name,fir_class_name,sat_class_name,sun_class_name,part,
         						create_time,update_time,is_active)  
-        			values (#{college_id},#{class_id},#{mon},#{tues},#{wed},#{thurs},#{fir},#{sat},#{sun},#{mon_class_name},
+        			values (#{college_id},#{college_name},#{class_id},#{class_name},#{mon},#{tues},#{wed},#{thurs},#{fir},#{sat},#{sun},#{mon_class_name},
         					#{tues_class_name},#{wed_class_name},#{thurs_class_name},#{fir_class_name},#{sat_class_name},
         					#{sun_class_name},#{part},#{create_time},#{update_time},#{is_active})  
 	</insert> 

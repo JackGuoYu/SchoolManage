@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.school.oa.entity.Score;
 import com.school.oa.entity.Subject;
+import com.school.oa.entity.User;
 import com.school.oa.service.ScoreService;
 import com.school.oa.service.SubjectService;
 
@@ -34,9 +36,13 @@ public class ScoreController {
 	 * @return
 	 */
 	@RequestMapping("/content_score")
-    public String content_score(Model model){
+    public String content_score(Model model, HttpSession session){
 		List<Score> scores = scoreService.findAll();
 		model.addAttribute("scores",scores);
+		User user = (User)session.getAttribute("user");
+		if(user==null) {
+			return "error_oa";
+		}
 		return "score/content_score";
 	}
 	
@@ -136,7 +142,9 @@ public class ScoreController {
 	@RequestMapping(value="/scoreedit", method=RequestMethod.GET)
     public String content_score_edit(@RequestParam Integer scoreId,Model model){
 		Score score = scoreService.selectById(scoreId);
+		List<Subject> subjects = subjectService.findAll();
 		model.addAttribute("score",score);
+		model.addAttribute("subjects", subjects);
 		return "/score/content_score_edit";
 	}
 	

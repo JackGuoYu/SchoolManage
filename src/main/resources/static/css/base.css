@@ -19,7 +19,7 @@ h4{}
 .f_s14{ font-size:14px;}
 .f_s16{ font-size:16px;}
 
-.bgcA td,
+.bgcA:nth-child(odd){ background-color:#6fe7d7;}
 .bgcA th{ background-color:#6fe7d7;}
 .bgcB td,
 .bgcB th{ background-color:#ffa0a0;}

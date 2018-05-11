@@ -50,7 +50,9 @@ public class UserController {
 		if(obj!=null) {
 			session.setAttribute("user", obj);
 			System.out.println("登录成功");
-			return "content";
+			List<User> users = userService.getUsers();
+			model.addAttribute("users",users);
+			return "/user/content_user";
 		}
 		else {
 			System.out.println("登录失败");
@@ -64,12 +66,14 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/createUser",method=RequestMethod.POST)
-    public String createUser(@ModelAttribute User user){
+    public String createUser(@ModelAttribute User user,Model model){
 		System.out.println(user);
 		int result = userService.createUser(user);
 		if(result!=0) {
 			System.out.println("创建成功");
-			return "redirect:content";
+			List<User> users = userService.getUsers();
+			model.addAttribute("users",users);
+			return "/user/content_user";
 		}
 		else {
 			System.out.println("创建失败");

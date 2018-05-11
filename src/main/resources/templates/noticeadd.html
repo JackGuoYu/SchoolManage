@@ -2,47 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>编辑用户</title>
+<title>编辑公告</title>
 <link rel="stylesheet" type="text/css" th:href="@{css/css.css}" />
 <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+<script type="text/javascript">
+	function hideOption(){
+		$("#theme").text("-请选择科目-");
+	}
+</script>
 </head>
 <body>
 	<div id="pageAll">
 		<div class="pageTop">
 			<div class="page">
-				<img src="img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+				<img src="img/coin11.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
 					href="#">公共管理</a>&nbsp;-</span>&nbsp;意见管理
 			</div>
 		</div>
 		<div class="page ">
 
-			<form action="#" th:action="@{/createScore}" th:object="${score}" method="post">
+			<form action="#" th:action="@{/createNotice}" th:object="${notice}" method="post">
 			<div class="banneradd bor">
 				<div class="baTopNo">
-					<span>新增成绩</span>
+					<span>新增公告</span>
 				</div>
 				<div class="baBody">
 					<div class="bbD">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;科目：
-						<select name="subject_name" >     
-						  <option>-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}"></option>     
-						 </select>  
-					</div>
-					<div class="bbD">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数：<input name="score" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题：<input name="theme" type="text"  
 							class="input3" />
 					</div>
+					<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容:</div>
 					<div class="bbD">
-						&nbsp;&nbsp;&nbsp;用户名：<input name="user_name"  type="text"  class="input3" />
-					</div>
-					<div class="bbD">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注：<input name="note"  type="text" class="input3" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea class="input3" style="height: 200px;" name="content" cols="25" rows="5" ></textarea>
 					</div>
 					<div class="bbD">
 						<p class="bbDP">
 							<input type="submit" class="btn_ok btn_yes" value="提交" >
-							<a class="btn_ok btn_no" href="content_score">取消</a>
+							<a class="btn_ok btn_no" href="content_notice">取消</a>
 						</p>
 					</div>
 				</div>
