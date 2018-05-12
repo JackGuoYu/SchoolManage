@@ -19,6 +19,7 @@ public class Book implements Serializable{
 	private Timestamp create_time;
 	private Timestamp update_time;
 	private Integer is_active;
+	
 	public Integer getId() {
 		return id;
 	}

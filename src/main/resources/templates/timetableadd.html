@@ -16,8 +16,41 @@
 		class_name = $("#class_id :selected").text();
 		$("#class_name").attr("value",class_name);
 	}
-	
-	
+	function setMon_Class_Name(){
+		var mon_class_name="";
+		mon_class_name = $("#mon_class_id :selected").text();
+		$("#mon_class_name").attr("value",mon_class_name);
+	}
+	function setTues_Class_Name(){
+		var tues_class_name="";
+		tues_class_name = $("#tues_class_id :selected").text();
+		$("#tues_class_name").attr("value",tues_class_name);
+	}
+	function setWed_Class_Name(){
+		var wed_class_name="";
+		wed_class_name = $("#wed_class_id :selected").text();
+		$("#wed_class_name").attr("value",wed_class_name);
+	}
+	function setThurs_Class_Name(){
+		var thurs_class_name="";
+		thurs_class_name = $("#thurs_class_id :selected").text();
+		$("#thurs_class_name").attr("value",thurs_class_name);
+	}
+	function setFir_Class_Name(){
+		var fir_class_name="";
+		fir_class_name = $("#fir_class_id :selected").text();
+		$("#fir_class_name").attr("value",fir_class_name);
+	}
+	function setSat_Class_Name(){
+		var sat_class_name="";
+		sat_class_name = $("#sat_class_id :selected").text();
+		$("#sat_class_name").attr("value",sat_class_name);
+	}
+	function setSun_Class_Name(){
+		var sun_class_name="";
+		sun_class_name = $("#sun_class_id :selected").text();
+		$("#sun_class_name").attr("value",sun_class_name);
+	}
 </script>
 </head>
 <body>
@@ -30,15 +63,15 @@
 		</div>
 		<div class="page ">
 
-		<form action="#" th:action="@{/createTimeTable}" th:object="${timeTable}" method="post">
+		<form action="#" th:action="@{/createTimeTable}" th:object="${timetable}" method="post">
 			<div class="banneradd bor">
 				<div class="baTopNo">
 					<span>课表添加</span>
 				</div>
-				<div >
+				<div style="margin-left:90px;">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;节数：
 						<select name="part" >     
-						  <option >-请选择节数-</option>     
+						  <option th:value="0">-请选择节数-</option>     
 						  <option value="1">第一节</option>     
 						  <option value="2" >第二节</option> 
 						  <option value="3" >第三节</option>
@@ -53,69 +86,75 @@
 					<div class="bbD">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学院：
 						<select name="college_id" id="college_id" onchange="setCollege_Name()">     
-						  <option  id="college">-请选择学院-</option>     
+						  <option  id="college" th:value="0">-请选择学院-</option>     
 						  <option th:each="college:${colleges}" th:value="${college.id}" th:text="${college.name}" ></option>
 						 </select>  
 					</div>
-					<input id="college_name" name="college_name" type="hidden" value=""/>
-					<div class="bbD">
+					<input id="college_name" name="college_name" type="hidden" value="${timetable.college_name}"/>
+					 <div class="bbD">
 						所属专业：
 						<select name="class_id" id="class_id" onchange="setClass_Name()">     
-						  <option>-请选择专业-</option>     
+						  <option th:value="0">-请选择专业-</option>     
 						  <option  th:each="oaclass:${oaclasses}" th:value="${oaclass.id}" th:text="${oaclass.name}" ></option>
 						 </select>  
 					</div>
-					<input id="class_name" name="class_name" type="hidden" value=""/>
+					<input id="class_name" name="class_name" type="hidden" value="${timetable.class_name}"/>
 					<div class="bbD">
 						周一科目：
-						<select name="mon_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="mon" id="mon_class_id" onchange="setMon_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
+					<input id="mon_class_name" name="mon_class_name" type="hidden" value=""/>
 					<div class="bbD">
 						周二科目：
-						<select name="tues_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="tues" id="tues_class_id" onchange="setTues_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
+					<input id="tues_class_name" name="tues_class_name" type="hidden" value=""/>
 					<div class="bbD">
 						周三科目：
-						<select name="wed_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="wed" id="wed_class_id" onchange="setWed_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
+					<input id="wed_class_name" name="wed_class_name" type="hidden" value=""/>
 					 <div class="bbD">
 						周四科目：
-						<select name="thurs_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="thurs" id="thurs_class_id" onchange="setThurs_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
+					<input id="thurs_class_name" name="thurs_class_name" type="hidden" value=""/>
 					<div class="bbD">
 						周五科目：
-						<select name="fir_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="fir" id="fir_class_id" onchange="setFir_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
+					<input id="fir_class_name" name="fir_class_name" type="hidden" value=""/>
 					<div class="bbD">
 						周六科目：
-						<select name="sat_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="sat" id="sat_class_id" onchange="setSat_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
+					<input id="sat_class_name" name="sat_class_name" type="hidden" value=""/>
 					<div class="bbD">
 						周日科目：
-						<select name="sun_class_name">     
-						  <option >-请选择科目-</option>     
-						  <option th:each="subject:${subjects}" th:value="${subject.name}" th:text="${subject.name}" ></option>
+						<select name="sun" id="sun_class_id" onchange="setSun_Class_Name()">     
+						  <option th:value="0">-请选择科目-</option>     
+						  <option th:each="subject:${subjects}" th:value="${subject.id}" th:text="${subject.name}" ></option>
 						 </select>  
 					</div>
-					
+					<input id="sun_class_name" name="sun_class_name" type="hidden" value=""/>
 					<div class="bbD">
 						<p class="bbDP">
 							<input type="submit" class="btn_ok btn_yes" value="提交" >

@@ -15,4 +15,8 @@ public interface TimeTableService {
 	int updateTimeTable(TimeTable timeTable);
 	
 	int deleteTimeTable(Integer id);
+	
+	TimeTable selectByPart(TimeTable timeTable);
+	
+	List<TimeTable> findByTimeTable(TimeTable timeTable);
 }

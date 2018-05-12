@@ -78,13 +78,21 @@ public class TimeTableController {
 	 * @return
 	 */
 	@RequestMapping(value="/createTimeTable",method=RequestMethod.POST)
-    public String createTimeTable(@ModelAttribute TimeTable timeTable, Model model, HttpSession session){
-		System.out.println(timeTable);
+    public String createTimeTable(@ModelAttribute TimeTable timetable, Model model, HttpSession session){
+		System.out.println(timetable);
 		Timestamp current_time = new Timestamp(new Date().getTime());
-		timeTable.setCreate_time(current_time);
-		timeTable.setUpdate_time(current_time);
-		timeTable.setIs_active("1");
-		int result = timeTableService.createTimeTable(timeTable);
+		timetable.setCreate_time(current_time);
+		timetable.setUpdate_time(current_time);
+		timetable.setIs_active("1");
+		TimeTable isExeist = timeTableService.selectByPart(timetable);
+		int result = 0 ;
+		if(isExeist!=null) {
+			timetable.setId(isExeist.getId());
+			result = timeTableService.updateTimeTable(timetable);
+		}
+		else {
+			result = timeTableService.createTimeTable(timetable);
+		}
 		if(result!=0) {
 			System.out.println("创建成功");
 			List<TimeTable> timetables = timeTableService.findAll();
@@ -104,13 +112,13 @@ public class TimeTableController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateTimeTable",method=RequestMethod.POST)
-    public String updateTimeTable(@ModelAttribute TimeTable timeTable,Model model,HttpSession session){
-		System.out.println(timeTable);
+    public String updateTimeTable(@ModelAttribute TimeTable timetable,Model model,HttpSession session){
+		System.out.println(timetable);
 		Timestamp current_time = new Timestamp(new Date().getTime());
-		timeTable.setUpdate_time(current_time);
-		timeTable.setIs_active("1");
+		timetable.setUpdate_time(current_time);
+		timetable.setIs_active("1");
 	
-		int result = timeTableService.updateTimeTable(timeTable);
+		int result = timeTableService.updateTimeTable(timetable);
 		if(result!=0) {
 			List<TimeTable> timetables = timeTableService.findAll();
 			model.addAttribute("timetables",timetables);

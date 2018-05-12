@@ -46,4 +46,16 @@ public class TimeTableServiceImpl implements TimeTableService{
 		return timeTables;
 	}
 
+	@Override
+	public TimeTable selectByPart(TimeTable timeTable) {
+		TimeTable timetable = timeTableDao.selectByPart(timeTable);
+		return timetable;
+	}
+
+	@Override
+	public List<TimeTable> findByTimeTable(TimeTable timeTable) {
+		List<TimeTable> timeTables = timeTableDao.findByTimeTable(timeTable);
+		return timeTables;
+	}
+
 }
