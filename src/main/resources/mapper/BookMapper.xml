@@ -56,9 +56,6 @@
     		<if test="borrow_num != null">
     			borrow_num = #{borrow_num},
     		</if>
-    		<if test="name != null">
-    			name = #{name},
-    		</if>
     		<if test="give_id != null">
     			give_id = #{give_id},
     		</if>

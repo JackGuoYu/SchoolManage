@@ -9,6 +9,10 @@ $(function(){
 		window.location.href="http://localhost:8080/content_timetable";
 	});
 	
+	$("#booklist").click(function(){
+		window.location.href="http://localhost:8080/content_book";
+	});
+	
 	$("#scorelist").click(function(){
 		window.location.href="http://localhost:8080/content_score";
 	});

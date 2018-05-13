@@ -62,7 +62,6 @@ public class NoticeController {
 		System.out.println(notice);
 		Timestamp current_time = new Timestamp(new Date().getTime());
 		User user = (User) session.getAttribute("user");
-		notice.setUser_id(1);
 		notice.setCreate_time(current_time);
 		notice.setUpdate_time(current_time);
 		notice.setIs_active("1");

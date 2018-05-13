@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新增图书</title>
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<link rel="stylesheet" type="text/css" th:href="@{css/css.css}" />
+<script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+<script type="text/javascript">
+	$( function() {
+    	$( "#datepicker" ).datepicker();
+  	});
+	function setBorrow_Name(){
+		var borrow_name="";
+		borrow_name = $("#borrow_id :selected").text();
+		$("#borrow_name").attr("value",borrow_name);
+	}
+	
+	function setGive_Name(){
+		var give_name="";
+		give_name = $("#give_id :selected").text();
+		$("#give_name").attr("value",give_name);
+	}
+</script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;意见管理
+			</div>
+		</div>
+		<div class="page ">
+
+			<form action="#" th:action="@{/createBook}" th:object="${book}" method="post">
+			<div class="banneradd bor">
+				<div class="baTopNo">
+					<span>新增成绩</span>
+				</div>
+				<div class="baBody">
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;书名：<input name="book_name" type="text"  
+							class="input3" />
+					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编号：<input name="book_code" type="text"  
+							class="input3" disabled="disabled" th:value="提交便生成"/>
+					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;借阅人：
+						<select name="borrow_id" id="borrow_id" onchange="setBorrow_Name()">     
+						  <option  th:value="0">-请选择借阅人-</option>     
+						  <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" ></option>
+						 </select>  
+					</div>
+				
+					<div class="bbD">
+							借阅次数：<input name="borrow_num" type="text"  
+							class="input3" disabled="disabled" th:value="0"/>
+					</div>
+					<input id="borrow_name" name="borrow_name" type="hidden" value=""/>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;还书人：
+						<select name="give_id" id="give_id" onchange="setGive_Name()">     
+						  <option  th:value="0">-请选择还书人-</option>     
+						  <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" ></option>
+						 </select>  
+					</div>
+					<input id="give_name" name="give_name" type="hidden" value=""/>
+				
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态：
+						<select name="state" >     
+						  <option value="0" >-请选择-</option>     
+						  <option value="1" >待借阅</option>     
+						  <option value="2" >已借阅</option>  
+						 </select>  
+					</div>
+					
+					<div class="bbD">
+						<p class="bbDP">
+							<input type="submit" class="btn_ok btn_yes" value="提交" >
+							<a class="btn_ok btn_no" href="content_score">取消</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			</form>
+			<!-- 会员注册页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

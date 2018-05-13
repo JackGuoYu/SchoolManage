@@ -12,11 +12,12 @@
 		<result column="class_id" property="class_id" jdbcType="INTEGER" />
 		<result column="class_name" property="class_name" jdbcType="VARCHAR" />
 		<result column="college_id" property="college_id" jdbcType="INTEGER" />
+		<result column="college_name" property="college_name" jdbcType="VARCHAR" />
 		<result column="role_id" property="role_id" jdbcType="INTEGER" />
 		<result column="role_name" property="role_name" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="User_Column_List" >
-        id, username, password, age, phone, sex, adress, class_id, class_name, college_id, role_id, role_name
+        id, username, password, age, phone, sex, adress, class_id, class_name, college_id, college_name, role_id, role_name
     </sql>
     <!-- 检查是否登录成功 -->
     <select id="getUser" resultMap="UserResultMap" parameterType="com.school.oa.entity.User" >
@@ -66,6 +67,9 @@
     		<if test="college_id != null">
     			college_id = #{college_id},
     		</if>
+    		<if test="college_name != null">
+    			college_name = #{college_name},
+    		</if>
     		<if test="role_id != null">
     			role_id = #{role_id},
     		</if>
@@ -83,8 +87,8 @@
     
     <!-- 插入用户记录 -->
     <insert id="insert" parameterType="com.school.oa.entity.User" useGeneratedKeys="true" keyProperty="id">  
-        insert into user (username, password, age, phone, sex, adress, class_id, class_name, college_id, role_id, role_name)  
-              values   (#{username},#{password},#{age},#{phone},#{sex},#{adress},#{class_id},#{class_name},#{college_id},#{role_id},#{role_name})  
+        insert into user (username, password, age, phone, sex, adress, class_id, class_name, college_id, college_name, role_id, role_name)  
+              values   (#{username},#{password},#{age},#{phone},#{sex},#{adress},#{class_id},#{class_name},#{college_id},#{college_name},#{role_id},#{role_name})  
 	</insert> 
 	
 	<!-- 删除用户 -->

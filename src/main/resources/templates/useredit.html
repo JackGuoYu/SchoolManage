@@ -5,6 +5,23 @@
 <title>编辑用户</title>
 <link rel="stylesheet" type="text/css" th:href="@{css/css.css}" />
 <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+<script type="text/javascript">
+function setCollege_Name(){
+	var college_name="";
+	college_name = $("#college_id :selected").text();
+	$("#college_name").attr("value",college_name);
+}
+function setClass_Name(){
+	var class_name="";
+	class_name = $("#class_id :selected").text();
+	$("#class_name").attr("value",class_name);
+}
+function setRole_Name(){
+	var role_name="";
+	role_name = $("#role_id :selected").text();
+	$("#role_name").attr("value",role_name);
+}
+</script>
 </head>
 <body>
 	<div id="pageAll">
@@ -47,6 +64,30 @@
 					<div class="bbD">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：<input name="adress"  type="text" class="input3" th:value="${user.adress}"/>
 					</div>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色：
+						<select name="role_id" id="role_id" onchange="setRole_Name()">     
+						  <option   th:value="${user.role_name}">-请选择角色-</option>     
+						  <option th:each="role:${roles}" th:value="${role.id}" th:text="${role.name}" th:selected="${role.id==user.role_id}"></option>
+						 </select>  
+					</div>
+					<input id="role_name" name="role_name" type="hidden" th:value="${user.role_name}"/>
+					<div class="bbD">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学院：
+						<select name="college_id" id="college_id" onchange="setCollege_Name()">     
+						  <option  id="college" th:value="${user.class_name}">-请选择学院-</option>     
+						  <option th:each="college:${colleges}" th:value="${college.id}" th:text="${college.name}" th:selected="${college.id==user.college_id}"></option>
+						 </select>  
+					</div>
+					<input id="college_name" name="college_name" type="hidden" th:value="${user.class_name}"/>
+					 <div class="bbD">
+						所属专业：
+						<select name="class_id" id="class_id" onchange="setClass_Name()">     
+						  <option th:value="${user.class_name}">-请选择专业-</option>     
+						  <option  th:each="oaclass:${oaclasses}" th:value="${oaclass.id}" th:text="${oaclass.name}" th:selected="${oaclass.id==user.class_id}"></option>
+						 </select>  
+					</div>
+					<input id="class_name" name="class_name" type="hidden" th:value="${user.class_name}"/>
 					<div class="bbD">
 						<p class="bbDP">
 							<input type="submit" class="btn_ok btn_yes" value="提交" >

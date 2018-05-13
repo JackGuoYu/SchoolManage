@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.school.oa.entity.College;
+import com.school.oa.entity.OAClass;
+import com.school.oa.entity.Role;
 import com.school.oa.entity.User;
+import com.school.oa.service.CollegeService;
+import com.school.oa.service.OAClassService;
+import com.school.oa.service.RoleService;
 import com.school.oa.service.UserService;
 
 @Controller
@@ -21,6 +27,15 @@ public class UserController {
 	
 	@Resource
 	private UserService userService;
+	
+	@Resource
+	private CollegeService collegeService;
+	
+	@Resource
+	private OAClassService oAClassService;
+	
+	@Resource
+	private RoleService roleService;
 	
 	/**
 	 * 跳转到登陆页
@@ -66,13 +81,14 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/createUser",method=RequestMethod.POST)
-    public String createUser(@ModelAttribute User user,Model model){
+    public String createUser(@ModelAttribute User user,Model model,HttpSession session){
 		System.out.println(user);
 		int result = userService.createUser(user);
 		if(result!=0) {
 			System.out.println("创建成功");
 			List<User> users = userService.getUsers();
 			model.addAttribute("users",users);
+			session.setAttribute("user", user);
 			return "/user/content_user";
 		}
 		else {
@@ -142,6 +158,12 @@ public class UserController {
 	@RequestMapping(value="/useredit", method=RequestMethod.GET)
     public String content_user_edit(@RequestParam Integer userId,Model model){
 		User user = userService.enterUserForm(userId);
+		List<College> colleges = collegeService.findAll();
+		List<OAClass> oaclasses = oAClassService.findAll();
+		List<Role> roles = roleService.findAll();
+		model.addAttribute("colleges", colleges);
+		model.addAttribute("oaclasses", oaclasses);
+		model.addAttribute("roles", roles);
 		model.addAttribute("user",user);
 		return "/user/content_user_edit";
 	}
@@ -152,7 +174,13 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/userRegister", method=RequestMethod.GET)
-    public String userRegister(){
+    public String userRegister(Model model){
+		List<College> colleges = collegeService.findAll();
+		List<OAClass> oaclasses = oAClassService.findAll();
+		List<Role> roles = roleService.findAll();
+		model.addAttribute("colleges", colleges);
+		model.addAttribute("oaclasses", oaclasses);
+		model.addAttribute("roles", roles);
 		return "useradd";
 	}
 	

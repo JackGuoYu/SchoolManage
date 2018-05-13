@@ -39,8 +39,8 @@ public class ABooksController {
 		book.setUpdate_time(current_time);
 		book.setBorrow_time(current_time);
 		book.setGive_time(current_time);
-		book.setIs_active(1);
-		book.setState(1);
+		book.setIs_active("1");
+		book.setState("1");
 		try {
 			int result = bookService.createBook(book);
 			if (result != 0) {
