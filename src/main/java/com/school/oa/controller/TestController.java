@@ -18,6 +18,11 @@ public class TestController {
 		return "changepwd";
 	}
 	
+	@RequestMapping("/1111")
+    public String websock(ModelMap map){
+		return "1111";
+	}
+	
 	@RequestMapping("/demo2")
     public String helloHtml2(ModelMap map){
 		return "head2";

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.school.oa.controller.websocket.handle.WebSocketServer;
 import com.school.oa.entity.Score;
 import com.school.oa.entity.Subject;
 import com.school.oa.entity.User;
@@ -53,6 +54,8 @@ public class ScoreController {
 	 */
 	@RequestMapping(value="/scoreadd", method=RequestMethod.GET)
     public String content_score_add(Model model){
+		System.out.println("添加成绩");
+		WebSocketServer.sendMessageToUsers("添加成绩11111");
 		List<Subject> subjects = subjectService.findAll();
 		model.addAttribute("subjects", subjects);
 		return "/score/content_score_add";

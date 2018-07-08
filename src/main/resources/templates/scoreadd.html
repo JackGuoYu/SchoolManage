@@ -5,6 +5,17 @@
 <title>新增成绩</title>
 <link rel="stylesheet" type="text/css" th:href="@{css/css.css}" />
 <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+<script type="text/javascript">
+
+	if(ws!=undefined){
+		alert(ws);
+		ws.onmessage = function(event){
+			var dv=document.getElementById("dv");
+			dv.innerHTML += event.data;	
+			alert(event.data);
+		};
+	}
+</script>
 </head>
 <body>
 	<div id="pageAll">

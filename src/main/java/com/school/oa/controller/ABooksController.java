@@ -23,7 +23,29 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("/books")
 public class ABooksController {
+	public static void main(String[] args) {
+		System.out.println("打印："+getNum());
+	}
 	
+	public static String  getNum() {
+		String num="1";
+		try {
+			System.out.println("111");
+			return getBBB();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			System.out.println("333");
+			return "2";
+		}
+	}
+	
+	public static String getBBB() {
+		System.out.println("222");
+		return "3";
+	}
 	
 	@Resource
 	private BookService bookService;
